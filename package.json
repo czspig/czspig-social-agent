@@ -1,0 +1,36 @@
+{
+  "name": "czspig-social-agent",
+  "productName": "暖暖猪",
+  "version": "0.1.0",
+  "description": "暖暖猪：替你盯飞书消息、记会议、写周报的个人助手",
+  "private": true,
+  "type": "module",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "core": "tsx src/core/standalone.ts",
+    "web": "vite --config vite.web.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "tsx --test src/core/*.test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
+    "@larksuiteoapi/node-sdk": "^1.76.0",
+    "lxgw-wenkai-screen-webfont": "^1.7.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^45.3.1",
+    "electron-vite": "^6.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  }
+}
