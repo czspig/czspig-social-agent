@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 import type { Settings } from '../shared/types'
+import { DEFAULT_SETTINGS, type SecretName } from './defaults'
 
 export interface SecretCodec {
   encrypt(plain: string): string
@@ -11,25 +12,7 @@ export interface SecretCodec {
 
 const plainCodec: SecretCodec = { encrypt: (s) => s, decrypt: (s) => s }
 
-export const DEFAULT_SETTINGS: Settings = {
-  theme: 'system',
-  demoMode: true,
-  userName: '',
-  llmModel: 'claude-opus-5-5',
-  pollSeconds: 90,
-  digestTimes: ['11:00', '15:00', '18:00'],
-  morningTime: '09:00',
-  dndEnabled: false,
-  dndStart: '14:00',
-  dndEnd: '15:30',
-  careEnabled: true,
-  musicApp: 'netease',
-  excludedChats: [],
-  feishuAppId: '',
-  feishuPushToSelf: true
-}
-
-export type SecretName = 'llmKey' | 'feishuSecret' | 'feishuWebhook' | 'feishuTokens'
+export { DEFAULT_SETTINGS, type SecretName } from './defaults'
 
 export class Store {
   private db: DatabaseSync

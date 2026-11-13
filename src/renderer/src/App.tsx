@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type ReactElement } from 'react'
 import type { AppEvent, HomeData } from '../../shared/types'
-import { useData } from './api'
+import { isWebDemo, useData } from './api'
 import { Icon, Pig } from './art'
 import { AppCtx } from './ui'
 import Home from './pages/Home'
@@ -99,7 +99,7 @@ export default function App(): ReactElement {
               <>
                 <div>
                   <span className={'dot ' + (home.demoMode ? 'demo' : home.feishu.feishuLogin ? 'ok' : '')} />
-                  {home.demoMode ? '演示模式' : home.feishu.feishuLogin ? '飞书已连接' : '飞书未连接'}
+                  {home.demoMode ? (isWebDemo ? '网页演示版' : '演示模式') : home.feishu.feishuLogin ? '飞书已连接' : '飞书未连接'}
                 </div>
                 <div>
                   <span className={'dot ' + (home.llmReady ? 'ok' : '')} />

@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+/** True in the static web demo (GitHub Pages), where the core runs inside the page with no model or Feishu. */
+export const isWebDemo = typeof document !== 'undefined' && document.documentElement.classList.contains('web-demo')
+
+export const REPO_URL = 'https://github.com/czspig/czspig-social-agent'
+
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const res = await fetch('/api' + path, {
     method,

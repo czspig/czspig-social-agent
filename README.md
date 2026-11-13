@@ -2,6 +2,8 @@
 
 替你盯着飞书消息的个人助手。它以你本人的身份读取消息，分清轻重：要紧的立刻提醒，不急的攒成简报，其余的替你挡下。它只提醒你，不会替你回复任何人。
 
+**在线体验：** https://czspig.github.io/czspig-social-agent/ （网页演示版，用示例消息，不接模型和飞书；数据只存在你的浏览器里）
+
 ## 现在能做什么
 
 | 功能 | 说明 |
@@ -42,6 +44,10 @@ npm start
 ```bash
 ELECTRON_MIRROR=https://cdn.npmmirror.com/binaries/electron/ npm install
 ```
+
+## 网页演示版
+
+`npm run build:web` 会把界面和核心逻辑一起打包成纯静态页面（输出到 `dist-web/`），核心在浏览器里运行，`/api` 请求由页面内部直接应答。模型和飞书在这个版本里被替换成空实现，设置页也会隐藏密钥和登录相关的项。推送到 `main` 后，GitHub Actions 会自动发布到 GitHub Pages。本地预览用 `npm run demo:web`。
 
 ## 接入真实的飞书
 

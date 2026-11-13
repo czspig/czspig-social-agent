@@ -2,6 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     { "name": "core", "runtimeExecutable": "npm", "runtimeArgs": ["run", "core"], "port": 4317 },
-    { "name": "web", "runtimeExecutable": "npm", "runtimeArgs": ["run", "web"], "port": 5173 }
+    { "name": "web", "runtimeExecutable": "npm", "runtimeArgs": ["run", "web"], "port": 5173 },
+    { "name": "web-demo", "runtimeExecutable": "npx", "runtimeArgs": ["vite", "preview", "--config", "vite.demo.config.ts", "--port", "5175", "--strictPort"], "port": 5175 }
   ]
 }

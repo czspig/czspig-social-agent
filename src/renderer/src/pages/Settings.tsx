@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactElement, type ReactNode } from 'react'
 import type { Level, Rule, SecretStatus, Settings as S } from '../../../shared/types'
-import { api, useData } from '../api'
+import { api, isWebDemo, REPO_URL, useData } from '../api'
 import { Icon, Pig } from '../art'
 import { LEVEL_NAME, Switch, useApp } from '../ui'
 
@@ -93,7 +93,11 @@ export default function Settings(): ReactElement | null {
         {s.demoMode && (
           <div className="note row">
             <Pig size={34} mood="happy" />
-            <span>现在是演示模式，看到的消息都是示例。接好飞书后，在最下面关掉演示模式就会读取真实消息。</span>
+            <span>
+              {isWebDemo
+                ? '现在是网页演示版，看到的消息都是示例。这里的改动只存在你的浏览器里。'
+                : '现在是演示模式，看到的消息都是示例。接好飞书后，在最下面关掉演示模式就会读取真实消息。'}
+            </span>
           </div>
         )}
         {data.lastError && <div className="note err">最近一次出错：{data.lastError}</div>}
@@ -258,6 +262,22 @@ export default function Settings(): ReactElement | null {
           </Field>
         </Section>
 
+        {isWebDemo ? (
+          <Section title="网页演示版" sub="你现在打开的是网页里的演示，所有数据都只存在这个浏览器里。">
+            <p className="muted" style={{ margin: '0 0 12px' }}>
+              分级、简报、待办、纪要、周报和找人都能直接试，用的是示例消息，每隔一会儿会来一条新的。接入 Claude 和飞书需要下载桌面版，在那里填密钥、登录飞书账号，密钥只存在你自己的电脑上。
+            </p>
+            <div className="row wrap">
+              <a className="btn primary" style={{ textDecoration: 'none' }} href={REPO_URL} target="_blank" rel="noreferrer">
+                去 GitHub 看源码
+              </a>
+              <button className="btn" onClick={() => api.post('/demo/reset').then(() => (bump(), say('示例数据已重置')))}>
+                重置示例数据
+              </button>
+            </div>
+          </Section>
+        ) : (
+          <>
         <Section title="模型" sub="接入后，拿不准的消息会交给模型判断，回复、纪要和周报也会更自然。不接也能用，只是按规则和固定句式来。">
           <Field label="Claude API 密钥" help={data.secrets.llmKey ? '已经配置好了。输入新的会替换掉旧的。' : '密钥只保存在这台电脑上。'}>
             <div className="row">
@@ -359,6 +379,8 @@ export default function Settings(): ReactElement | null {
             </button>
           )}
         </Section>
+          </>
+        )}
       </div>
     </div>
   )

@@ -13,7 +13,9 @@
     "core": "tsx src/core/standalone.ts",
     "web": "vite --config vite.web.config.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "tsx --test src/core/*.test.ts"
+    "test": "tsx --test src/core/*.test.ts",
+    "demo:web": "vite --config vite.demo.config.ts",
+    "build:web": "vite build --config vite.demo.config.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",
